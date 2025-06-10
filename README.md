@@ -31,6 +31,26 @@ Wheatherly is a modern, feature-rich weather application built with Next.js that
   - YouTube Data API
   - Windy API
 
+## Dependencies
+
+### Core Dependencies
+- `next`: ^14.1.0 - React framework
+- `react`: ^18.2.0 - UI library
+- `react-dom`: ^18.2.0 - React DOM rendering
+- `axios`: ^1.6.7 - HTTP client
+- `@heroicons/react`: ^2.1.1 - Icon library
+
+### Styling
+- `tailwindcss`: ^3.4.1 - Utility-first CSS framework
+- `autoprefixer`: ^10.4.17 - PostCSS plugin
+- `postcss`: ^8.4.35 - CSS transformation tool
+
+### Development Dependencies
+- `typescript`: ^5.3.3 - Type checking
+- `eslint`: ^8.56.0 - Code linting
+- `@types/react`: ^18.2.57 - TypeScript definitions
+- `@types/node`: ^20.11.19 - Node.js TypeScript definitions
+
 ## Prerequisites
 
 Before you begin, ensure you have the following:
