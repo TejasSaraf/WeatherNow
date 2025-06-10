@@ -9,6 +9,8 @@ import {
   CalendarIcon,
   MapPinIcon,
   ArrowDownTrayIcon,
+  PlayIcon,
+  MapIcon,
 } from "@heroicons/react/24/outline";
 
 const EXPORT_FORMATS = {
@@ -39,6 +41,9 @@ export default function WeatherRecords() {
   );
   const [exporting, setExporting] = useState(false);
   const [showExportMenu, setShowExportMenu] = useState(false);
+  const [locationData, setLocationData] = useState({});
+  const [selectedLocation, setSelectedLocation] = useState(null);
+  const [loadingLocationData, setLoadingLocationData] = useState(false);
 
   const fetchRecords = async () => {
     try {
@@ -305,6 +310,40 @@ export default function WeatherRecords() {
     window.URL.revokeObjectURL(url);
   };
 
+  const fetchLocationData = async (location) => {
+    try {
+      console.log("Fetching location data for:", location);
+      setLoadingLocationData(true);
+      setError(null);
+      const response = await axios.get(`/api/location-data?location=${encodeURIComponent(location)}`);
+      console.log("Location data received:", response.data);
+      setLocationData(prev => ({
+        ...prev,
+        [location]: response.data
+      }));
+    } catch (error) {
+      console.error("Error fetching location data:", error);
+      setError(
+        error.response?.data?.error ||
+        "Failed to fetch location data. Please try again."
+      );
+    } finally {
+      setLoadingLocationData(false);
+    }
+  };
+
+  const handleLocationClick = (location) => {
+    console.log("Location clicked:", location);
+    console.log("Current selected location:", selectedLocation);
+    setSelectedLocation(selectedLocation === location ? null : location);
+    if (!locationData[location]) {
+      console.log("No cached data, fetching location data...");
+      fetchLocationData(location);
+    } else {
+      console.log("Using cached location data:", locationData[location]);
+    }
+  };
+
   return (
     <div className="max-w-4xl mx-auto p-4">
       <div className="flex justify-between items-center mb-6">
@@ -442,7 +481,8 @@ export default function WeatherRecords() {
             className="bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-4"
           >
             <div className="flex justify-between items-start mb-3">
-              <h3 className="text-lg font-bold text-white">
+              <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                <MapPinIcon className="h-5 w-5" />
                 {record.location}
               </h3>
               <div className="flex gap-2">

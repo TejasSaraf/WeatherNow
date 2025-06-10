@@ -22,6 +22,7 @@ import {
   TemperatureDisplay,
   WeatherInfo,
 } from "../WeatherComponents";
+import LocationData from "../LocationData/LocationData";
 
 const useDebounce = (value, delay) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
@@ -81,7 +82,7 @@ const convertTemperature = (temp, fromUnit, toUnit) => {
   }
 };
 
-export default function WeatherDetails() {
+export default function WeatherDetails({ weatherData }) {
   const [location, setLocation] = useState("");
   const [weather, setWeather] = useState(null);
   const [forecast, setForecast] = useState(null);
@@ -552,6 +553,13 @@ export default function WeatherDetails() {
             </div>
           </div>
         )}
+
+        <div className="mt-8 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg p-6">
+          <h2 className="text-2xl font-bold text-white mb-6">
+            Location Information
+          </h2>
+          {weather && <LocationData location={weather.name} />}
+        </div>
       </div>
     </div>
   );
