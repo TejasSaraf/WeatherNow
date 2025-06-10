@@ -1,36 +1,116 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Wheatherly - Modern Weather Application
 
-## Getting Started
+Wheatherly is a modern, feature-rich weather application built with Next.js that provides real-time weather information, wind maps, and location-based content.
 
-First, run the development server:
+## Features
 
+- 🌤️ Real-time weather data
+- 🗺️ Interactive wind map visualization
+- 📍 Location search with support for:
+  - City names
+  - Postal codes
+  - Coordinates
+  - Famous landmarks
+- 📊 Weather records management
+- 📱 Responsive design
+- 🎥 Location-based YouTube videos
+- 📤 Data export in multiple formats:
+  - JSON
+  - CSV
+  - XML
+  - PDF
+  - Markdown
+
+## Tech Stack
+
+- **Framework**: Next.js
+- **Styling**: Tailwind CSS
+- **Icons**: Heroicons
+- **APIs**:
+  - OpenWeatherMap API
+  - YouTube Data API
+  - Windy API
+
+## Prerequisites
+
+Before you begin, ensure you have the following:
+- Node.js (v14 or higher)
+- npm or yarn
+- API keys for:
+  - OpenWeatherMap
+  - YouTube Data API
+
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/wheatherly.git
+cd wheatherly
+```
+
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Create a `.env.local` file in the root directory and add your API keys:
+```env
+OPENWEATHER_API_KEY=your_openweather_api_key
+YOUTUBE_API_KEY=your_youtube_api_key
+```
+
+4. Start the development server:
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+wheatherly/
+├── app/
+│   ├── api/              # API routes
+│   ├── components/       # React components
+│   └── page.js          # Main page
+├── public/              # Static assets
+└── styles/             # Global styles
+```
 
-## Learn More
+## API Routes
 
-To learn more about Next.js, take a look at the following resources:
+- `/api/weather` - Fetches weather data
+- `/api/location-data` - Fetches location data and coordinates
+- `/api/weather-records` - Manages weather records
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Components
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `WeatherDetails` - Main weather display component
+- `LocationData` - Location information and wind map
+- `WeatherRecords` - Weather records management
+- `WeatherComponents` - Reusable weather-related components
 
-## Deploy on Vercel
+## Contributing
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- OpenWeatherMap for weather data
+- YouTube Data API for video content
+- Windy for wind map visualization
+- Next.js team for the amazing framework
+- Tailwind CSS for the styling framework
