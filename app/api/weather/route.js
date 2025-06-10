@@ -176,7 +176,8 @@ export async function GET(request) {
     const forecastData = await forecastResponse.json();
     const dailyForecasts = new Set();
     const today = new Date().toLocaleDateString();
-
+    
+    // Filter forecast to get next 5 days starting from tomorrow
     const processedForecast = forecastData.list
       .filter((item) => {
         const itemDate = new Date(item.dt * 1000).toLocaleDateString();
@@ -189,13 +190,44 @@ export async function GET(request) {
       })
       .slice(0, 5);
 
+    // Get start and end dates from the forecast
+    const startDate = processedForecast[0] ? new Date(processedForecast[0].dt * 1000) : null;
+    const endDate = processedForecast[processedForecast.length - 1] 
+      ? new Date(processedForecast[processedForecast.length - 1].dt * 1000) 
+      : null;
+
     weatherData.name = locationName;
+
+    // Save weather record
+    try {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/weather/records`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          location_name: locationName,
+          temperature: weatherData.main.temp,
+          feels_like: weatherData.main.feels_like,
+          humidity: weatherData.main.humidity,
+          wind_speed: weatherData.wind.speed,
+          weather_description: weatherData.weather[0].description,
+          unit: unit,
+        }),
+      });
+    } catch (error) {
+      console.error('Failed to save weather record:', error);
+    }
 
     return NextResponse.json({
       current: weatherData,
       forecast: {
         ...forecastData,
         list: processedForecast,
+        dateRange: {
+          start: startDate ? startDate.toISOString() : null,
+          end: endDate ? endDate.toISOString() : null
+        }
       },
       unit: unit,
     });
