@@ -30,6 +30,7 @@ Wheatherly is a modern, feature-rich weather application built with Next.js that
   - OpenWeatherMap API
   - YouTube Data API
   - Windy API
+- **Backend**: Postgres, Prisma Orm
 
 ## Dependencies
 
@@ -59,6 +60,7 @@ Before you begin, ensure you have the following:
 - API keys for:
   - OpenWeatherMap
   - YouTube Data API
+- Postgres
 
 ## Installation
 
